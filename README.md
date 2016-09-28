@@ -79,7 +79,7 @@ For quick reference here is the structure:
 ```
 
 ## Optional: Redirecting & Reloading
-The JavaScript controlling the modal windows will respond to specific reload & redirect requests.  You may trigger a complete page reload or a redirect by loading a page into the modal window by adjusting your controller as follows:
+The JavaScript controlling the modal windows will respond to specific reload & redirect requests.  You may trigger a complete page reload or a redirect by loading a page into the modal window that is generated with a custom response from your controller.  An example of both is described below.
 
 ```
 use Symfony\Component\HttpFoundation\Request;
