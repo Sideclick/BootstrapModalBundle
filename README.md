@@ -85,9 +85,10 @@ For quick reference here is the structure:
 The JavaScript controlling the modal windows will respond to specific reload & redirect requests.  You may trigger a complete page reload or a redirect by loading a page into the modal window that is generated with a custom response from your controller.  An example of both is described below.
 
 ```
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
-class DefaultController extends BaseController
+class DefaultController extends Controller
 {
     // implement the BootstrapModalBundle Controller Trait which will
     // bring two methods: redirectWithAjaxSupport() & reloadWithAjaxSupport()
@@ -104,6 +105,8 @@ class DefaultController extends BaseController
     }
 }
 ```
+
+If you are planning to use modals all over the place it is advisable to create a single 'base controller' from which all your other controllers extend.
 
 
 And that's it!
