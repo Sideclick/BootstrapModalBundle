@@ -1,0 +1,4 @@
+services:
+#    sideclick_bootstrap_modal.example:
+#        class: Sideclick\BootstrapModalBundle\Example
+#        arguments: ["@service_id", "plain_value", %parameter%]

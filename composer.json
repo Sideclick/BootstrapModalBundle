@@ -1,0 +1,22 @@
+{
+    "name": "sideclick/bootstrap-modal-bundle",
+    "description": "Bundle for Symfony 2.6+ that makes it easy to load pages into a Bootstrap modal window.",
+    "type": "package",
+    "require": {
+        "php": ">=5.5",
+        "symfony/symfony": ">=2.6,~3.0"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Rowan Reid",
+            "email": "rowan@sideclick.co.za"
+        }
+    ],
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {
+            "Sideclick\\BootstrapModalBundle\\": "src/"
+        }
+    }
+}
