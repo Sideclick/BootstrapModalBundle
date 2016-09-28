@@ -3,6 +3,7 @@
 namespace Sideclick\BootstrapModalBundle\Controller;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 
 trait ControllerTrait
 {
@@ -13,15 +14,16 @@ trait ControllerTrait
      * variable called 'redirect' which is the URL that should be redirected to.  This is used so that we can perform
      * redirects from pages submitted by Ajax and avoid the redirected content appearing inside a Modal or something
      *
+     * @param $request
      * @param $url
      * @param int $status
      *
      * @return JsonResponse|\Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function redirectWithAjaxSupport($url, $status = 302)
+    public function redirectWithAjaxSupport(Request $request, $url, $status = 302)
     {
         // if the request is an ajax one
-        if ($this->getRequest()->isXmlHttpRequest()) {
+        if ($request->isXmlHttpRequest()) {
 
             // then return some json which tells our JS to perform a redirect
             // @todo - Maybe we need to send the status through?
@@ -41,14 +43,15 @@ trait ControllerTrait
      * instruction back to our modal ajax handler, otherwise it will just
      * perform a PHP redirect back to the current url.
      *
+     * @param $request
+     *
      * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
-    public function reloadWithAjaxSupport()
+    public function reloadWithAjaxSupport(Request $request)
     {
-        $request = $this->getRequest();
 
         // if the request is an ajax one
-        if ($this->getRequest()->isXmlHttpRequest()) {
+        if ($request->isXmlHttpRequest()) {
 
             // then return some json which tells our JS to perform a window
             // reload
