@@ -45,7 +45,7 @@ Include the JS file and the empty modal div just before your closing </body> tag
 ```
 
 ### Step 4:
-The JavaScript filoe above relies on Bootstrap 3.x & jQuery 1.x  Please include those two libraries on any page using this bundle.
+This bundle relies on Bootstrap 3.x & jQuery 1.x  You must include those two libraries on any page using this bundle.
 
 ## Usage
 
