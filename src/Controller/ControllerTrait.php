@@ -77,13 +77,13 @@ trait ControllerTrait
      *
      * @return JsonResponse|\Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function redirectWithRouteNameAjaxSupport(Request $request, $url, $status = 302)
+    public function redirectToRouteWithAjaxSupport(Request $request, $route, $status = 302)
     {
         // if the request is an ajax one
         if ($request->isXmlHttpRequest()) {
 
             //convert route name to url
-            $url = $this->generateUrl($url);
+            $url = $this->generateUrl($route);
 
             // then return some json which tells our JS to perform a redirect
             // @todo - Maybe we need to send the status through?
@@ -93,7 +93,7 @@ trait ControllerTrait
         } else {
 
             // perform a normal redirect
-            return $this->redirect($url, $status);
+            return $this->redirect($route, $status);
         }
     }
 }
