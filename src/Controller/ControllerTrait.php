@@ -66,24 +66,24 @@ trait ControllerTrait
     }
 
     /**
-     * This function will do exactly the same thing as the redirect() function in the parent class, however, if the
+     * This function will do exactly the same thing as the redirectToRoute() function in the parent class, however, if the
      * request is an Ajax request, then instead of performing a normal redirect, we return some json containing a
-     * variable called 'redirect' which is the URL that should be redirected to.  This is used so that we can perform
+     * variable called 'redirect' which is the ROUTE that should be redirected to.  This is used so that we can perform
      * redirects from pages submitted by Ajax and avoid the redirected content appearing inside a Modal or something
      *
-     * @param $request
-     * @param $url
+     * @param Request $request
+     * @param $route
+     * @param array $parameters
      * @param int $status
-     *
      * @return JsonResponse|\Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function redirectToRouteWithAjaxSupport(Request $request, $route, $status = 302)
+    public function redirectToRouteWithAjaxSupport(Request $request, $route, $parameters = [], $status = 302)
     {
         // if the request is an ajax one
         if ($request->isXmlHttpRequest()) {
 
             //convert route name to url
-            $url = $this->generateUrl($route);
+            $url = $this->generateUrl($route, $parameters);
 
             // then return some json which tells our JS to perform a redirect
             // @todo - Maybe we need to send the status through?
