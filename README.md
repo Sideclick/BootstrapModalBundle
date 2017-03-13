@@ -36,12 +36,15 @@ public function registerBundles()
 ### Step 3:
 Include the JS file and the empty modal div just before your closing </body> tag on any page that you want to be able to open a modal window.
 ```
-<script src="{{ asset('bundles/sideclickbootstrapmodal/js/sideclick-bootstrap-modal.js') }}"></script>
+Check if sideclick-bootstrap-modal.js is added to your Bundles Assets folder.
+If not run please -  php bin/console assets:install
+
 <div class="modal fade" id="emptyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-async data-target="#emptyModal">
     <div class="modal-dialog">
     </div>
 </div>
 
+<script src="{{ asset('bundles/sideclickbootstrapmodal/js/sideclick-bootstrap-modal.js') }}"></script>
 ```
 
 ### Step 4:
@@ -91,7 +94,7 @@ use Symfony\Component\HttpFoundation\Request;
 class DefaultController extends Controller
 {
     // implement the BootstrapModalBundle Controller Trait which will
-    // bring two methods: redirectWithAjaxSupport() & reloadWithAjaxSupport()
+    // bring three methods: redirectWithAjaxSupport(), reloadWithAjaxSupport() & redirectToRouteWithAjaxSupport()
     use \Sideclick\BootstrapModalBundle\Controller\ControllerTrait;
     
     public function thisActionWillRedirect(Request $request)
@@ -102,6 +105,11 @@ class DefaultController extends Controller
     public function thisActionWillReload(Request $request)
     {
         return $this->reloadWithAjaxSupport($request)
+    }
+    
+    public function thisActionWillReload(Request $request)
+    {
+        return $this->redirectToRouteWithAjaxSupport($request,'route_name',['parameters'=>$parameters])
     }
 }
 ```
