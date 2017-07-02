@@ -110,6 +110,11 @@ $(function() {
      */
     bindModalLinks = function () {
 
+        // We no longer use this function as it hijacks the way that normal Bootstrap modals work which means
+        // we can't use this bundle alongside normal bootstrap modals.  This logic is no longer necessary given
+        // that we use the hashChange to launch modals
+        return true;
+        
         // first unbind any click listners (to prevent multiple calls
         // to this function for adding this binding over and over
         $("a[data-toggle='modal']").unbind('click');
