@@ -6,11 +6,34 @@ $(function() {
     // When our emptyModal is closed we remove it's content so that when it is filled
     // again then it will accept the new content, as per:
     // http://stackoverflow.com/questions/12286332/twitter-bootstrap-remote-modal-shows-same-content-everytime
-    $('body').on('hidden.bs.modal', '.modal', function () {
+    var $body = $('body');
+    $body.on('hidden.bs.modal', '.modal', function () {
         $(this).removeData('bs.modal');
 
         // clear all the previously loaded content out from inside the modal dialog
         $('#emptyModal').find('.modal-dialog').empty();
+
+
+    });
+
+    // New click listener to set the path to the modal url
+    // will first check to see if a hash url exit
+    // if a hash does exist the append modal url to it else
+    // set the hash url to the modal hash
+    $body.on('click','a[data-sideclick-modal-trigger]', function (e) {
+        e.preventDefault();
+        var $modalUrl = $(e.currentTarget).attr('href');
+        // if ($modalUrl.indexOf('#modal=')) {}
+        if ($modalUrl.indexOf('#modal=') !== -1){
+            $modalUrl = $modalUrl.substring(7, $modalUrl.length);
+        }
+        var modal = 'modal=' + $modalUrl;
+        if (window.location.hash === '') {
+            window.location.hash = modal;
+        }else {
+            var currentHash = window.location.hash.replace('#','');
+            window.location.hash = currentHash + '&' + modal;
+        }
     });
 
     // This function should be called after a form has been loaded into the #emptyModal with the 'data-async'
@@ -82,7 +105,8 @@ $(function() {
                         // @todo What we really want to do here is just remove the modal
                         // value but this is quicker for now, since we dont use the hash for
                         // anything else yet
-                        window.location.hash = '';
+                        // window.location.hash = '';
+                        createHashUrl();
 
                         window.location.reload();
                     } else {
@@ -114,7 +138,7 @@ $(function() {
         // we can't use this bundle alongside normal bootstrap modals.  This logic is no longer necessary given
         // that we use the hashChange to launch modals
         return true;
-        
+
         // first unbind any click listners (to prevent multiple calls
         // to this function for adding this binding over and over
         $("a[data-toggle='modal']").unbind('click');
@@ -153,7 +177,6 @@ $(function() {
 
         bindModalAjaxForms();
         bindModalLinks();
-
     };
 
     // This function looks at the window.location.hash string as a
@@ -220,8 +243,8 @@ $(function() {
                         // @todo What we really want to do here is just remove the modal
                         // value but this is quicker for now, since we dont use the hash for
                         // anything else yet
-                        window.location.hash = '';
-
+                        // window.location.hash = '';
+                        createHashUrl();
                         window.location.reload();
                     }
                 } else {
@@ -249,7 +272,10 @@ $(function() {
     // value but this is quicker for now, since we dont use the hash for
     // anything else yet
     $('#emptyModal').on('hide.bs.modal', function (e) {
-        window.location.hash = '';
+        // window.location.hash = '';
+        // get the whole hash variable without the leading #
+
+        createHashUrl();
     });
 
     //
@@ -311,10 +337,41 @@ $(function() {
                 // Position field now displays the appropriate positions.
             }
         });
-    }
+    };
+
+    // when closing the modal this method will check if a hash
+    // existed besides the modal has
+    // if so reset the hash to that value
+    createHashUrl = function() {
+        var hash = window.location.hash;
+        if (hash !== '') {
+            var query = window.location.hash.replace('#','');
+            var pairArray = [];
+            var hashUrlArray = [];
+            // split into constituent key value pairs based on &
+            var vars = query.split('&');
+            console.log(vars);
+            for (var i = 0; i < vars.length; i++) {
+                // split into the key value pair based on =
+                var pair = vars[i].split('=');
+                pairArray.push(pair);
+            }
+            $.each(pairArray, function (key, pair) {
+                if (pair.indexOf('modal') === -1) {
+                    var hashUrl = pair.join('=');
+                    hashUrlArray.push(hashUrl);
+                }
+            });
+            window.location.hash = hashUrlArray.join('&');
+        }
+        if (hash === '') {
+            window.location.hash = '';
+        }
+
+    };
 
     // on page load initiate our ajaxCallPopulate links
-    bindAjaxCallPopulate($('body'));
+    bindAjaxCallPopulate($body);
 
     // on page load we bind modal links
     bindModalLinks();

@@ -36,25 +36,36 @@ public function registerBundles()
 ### Step 3:
 Include the JS file and the empty modal div just before your closing </body> tag on any page that you want to be able to open a modal window.
 ```
-<script src="{{ asset('bundles/sideclickbootstrapmodal/js/sideclick-bootstrap-modal.js') }}"></script>
+Check if sideclick-bootstrap-modal.js is added to your Bundles Assets folder.
+If not run please -  php bin/console assets:install
+
 <div class="modal fade" id="emptyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-async data-target="#emptyModal">
     <div class="modal-dialog">
     </div>
 </div>
 
+<script src="{{ asset('bundles/sideclickbootstrapmodal/js/sideclick-bootstrap-modal.js') }}"></script>
 ```
 
 ### Step 4:
 This bundle relies on Bootstrap 3.x & jQuery 1.x  You must include those two libraries on any page using this bundle.
 
 ## Usage
-
+### Old way of usage (Deprecated)
 To open a page in a modal you now simply prefix the href value of a URL with '#modal='.  For example:
 
 ```
 <a href="#modal=/login">Login</a>
 ```
 
+This way is deprecated because it does not accommodate URL that already use hash values 
+
+### New way of usage
+To open a page in a modal you now simply add a data attribute - data-sideclick-modal-trigger and set href with the necessary URL .   For example:
+
+```
+<a href="/login" data-sideclick-modal-trigger>Login</a>
+```
 This will cause the /login page to be loaded into the modal window instead of in the current tab.
 
 ## Optional: Suggested Structure of modal pages
@@ -91,7 +102,7 @@ use Symfony\Component\HttpFoundation\Request;
 class DefaultController extends Controller
 {
     // implement the BootstrapModalBundle Controller Trait which will
-    // bring two methods: redirectWithAjaxSupport() & reloadWithAjaxSupport()
+    // bring three methods: redirectWithAjaxSupport(), reloadWithAjaxSupport() & redirectToRouteWithAjaxSupport()
     use \Sideclick\BootstrapModalBundle\Controller\ControllerTrait;
     
     public function thisActionWillRedirect(Request $request)
@@ -102,6 +113,11 @@ class DefaultController extends Controller
     public function thisActionWillReload(Request $request)
     {
         return $this->reloadWithAjaxSupport($request)
+    }
+    
+    public function thisActionWillReload(Request $request)
+    {
+        return $this->redirectToRouteWithAjaxSupport($request,'route_name',['parameters'=>$parameters])
     }
 }
 ```
