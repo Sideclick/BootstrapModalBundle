@@ -51,13 +51,21 @@ If not run please -  php bin/console assets:install
 This bundle relies on Bootstrap 3.x & jQuery 1.x  You must include those two libraries on any page using this bundle.
 
 ## Usage
-
+### Old way of usage (Deprecated)
 To open a page in a modal you now simply prefix the href value of a URL with '#modal='.  For example:
 
 ```
 <a href="#modal=/login">Login</a>
 ```
 
+This way is deprecated because it does not accommodate URL that already use hash values 
+
+### New way of usage
+To open a page in a modal you now simply add a data attribute - data-sideclick-modal-trigger and set href with the necessary URL .   For example:
+
+```
+<a href="/login" data-sideclick-modal-trigger>Login</a>
+```
 This will cause the /login page to be loaded into the modal window instead of in the current tab.
 
 ## Optional: Suggested Structure of modal pages
