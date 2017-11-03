@@ -230,7 +230,23 @@ $(function() {
 
             var jqxhr = $.get( modalLocation, function(response, status, xhr) {
 
-                if ( status == "error" ) {
+                // if the response is JSON and has a redirect data item
+                if ( response.redirect ) {
+                    // data.redirect contains the string URL to redirect to
+                    window.location.replace(response.redirect);
+
+                    // else we have normal html
+                } else if ( data.reload ) {
+                        // Get rid of the hash - since the modal will still
+                        // be there and will then auto launch after the redirect
+                        // @todo What we really want to do here is just remove the modal
+                        // value but this is quicker for now, since we dont use the hash for
+                        // anything else yet
+                        // window.location.hash = '';
+                        createHashUrl();
+
+                        window.location.reload();
+                } else if ( status == "error" ) {
 
                     // if we got a Forbidden response returned then
                     // reload the page because it is likely that the user
