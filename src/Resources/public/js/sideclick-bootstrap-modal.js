@@ -236,7 +236,7 @@ $(function() {
                     window.location.replace(response.redirect);
 
                     // else we have normal html
-                } else if ( data.reload ) {
+                } else if ( response.reload ) {
                         // Get rid of the hash - since the modal will still
                         // be there and will then auto launch after the redirect
                         // @todo What we really want to do here is just remove the modal
