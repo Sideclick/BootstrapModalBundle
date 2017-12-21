@@ -362,10 +362,32 @@ $(function() {
                     hashUrlArray.push(hashUrl);
                 }
             });
-            window.location.hash = hashUrlArray.join('&');
+
+            /**
+             * We now set the hash value using replaceState so to not scroll to the anchor tag.  We fallback to
+             * window.location.hash in older browsers
+             * See: https://stackoverflow.com/questions/3870057/how-can-i-update-window-location-hash-without-jumping-the-document/17108603
+             */
+            if(history.replaceState) {
+                history.replaceState(null, null, '#' + hashUrlArray.join('&'));
+            }
+            else {
+                window.location.hash = '#' + hashUrlArray.join('&');
+            }
         }
         if (hash === '') {
-            window.location.hash = '';
+
+            /**
+             * We now set the hash value using pushState so to not scroll to the anchor tag.  We fallback to
+             * window.location.hash in older browsers
+             * See: https://stackoverflow.com/questions/3870057/how-can-i-update-window-location-hash-without-jumping-the-document/17108603
+             */
+            if(history.replaceState) {
+                history.replaceState(null, null, '#');
+            }
+            else {
+                window.location.hash = '#';
+            }
         }
 
     };
