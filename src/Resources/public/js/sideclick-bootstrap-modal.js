@@ -165,8 +165,18 @@ $(function() {
                 // then run the postPopulateModal function
                 postPopulateModal();
             })
-                .fail(function() {
-                    alert( "error" );
+                .fail(function(xhr, textStatus) {
+                    if (xhr.status == '403') {
+
+                        // Get rid of the hash - since the modal will still
+                        // be there and will then auto launch after the redirect
+                        // @todo What we really want to do here is just remove the modal
+                        // value but this is quicker for now, since we dont use the hash for
+                        // anything else yet
+                        // window.location.hash = '';
+                        createHashUrl();
+                        window.location.reload();
+                    }
                 });
 
             return false;
@@ -260,8 +270,19 @@ $(function() {
                 }
 
             })
-                .fail(function() {
-                    alert( "error" );
+                .fail(function(xhr, textStatus) {
+
+                    if (xhr.status == '403') {
+
+                        // Get rid of the hash - since the modal will still
+                        // be there and will then auto launch after the redirect
+                        // @todo What we really want to do here is just remove the modal
+                        // value but this is quicker for now, since we dont use the hash for
+                        // anything else yet
+                        // window.location.hash = '';
+                        createHashUrl();
+                        window.location.reload();
+                    }
                 });
 
         }
