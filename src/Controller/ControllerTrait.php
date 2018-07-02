@@ -79,11 +79,10 @@ trait ControllerTrait
      */
     public function redirectToRouteWithAjaxSupport(Request $request, $route, $parameters = [], $status = 302)
     {
+        $url = $this->generateUrl($route, $parameters);
+
         // if the request is an ajax one
         if ($request->isXmlHttpRequest()) {
-
-            //convert route name to url
-            $url = $this->generateUrl($route, $parameters);
 
             // then return some json which tells our JS to perform a redirect
             // @todo - Maybe we need to send the status through?
@@ -93,7 +92,7 @@ trait ControllerTrait
         } else {
 
             // perform a normal redirect
-            return $this->redirect($route, $status);
+            return $this->redirect($url, $status);
         }
     }
 }
