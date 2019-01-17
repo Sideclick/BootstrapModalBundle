@@ -1,12 +1,12 @@
 # BootstrapModalBundle
-Bundle for Symfony 2.6+ that makes it easy to load pages into a Bootstrap modal window.  If a page loaded into a modal window contains a form, the form will submit via ajax.
+Bundle for Symfony 3.4+ that makes it easy to load pages into a Bootstrap modal window.  If a page loaded into a modal window contains a form, the form will submit via ajax.
 
 ## Installation
 
 ### Step 1: Add the following to the "require" section of composer.json
 
 ```
-"sideclick/bootstrap-modal-bundle": "dev-master"
+"sideclick/bootstrap-modal-bundle": "~1.0"
 ```
 
 OR just require the bundle from the commandline
@@ -17,6 +17,8 @@ composer require sideclick/bootstrap-modal-bundle
 
 
 ### Step 2: Enable the bundle
+
+If you using Symfony 4 this step will be done automatically.
 
 Enable the bundle in the kernel:
 
@@ -48,7 +50,7 @@ If not run please -  php bin/console assets:install
 ```
 
 ### Step 4:
-This bundle relies on Bootstrap 3.x & jQuery 1.x  You must include those two libraries on any page using this bundle.
+This bundle relies on Bootstrap 3.x or Bootstrap 4.x & jQuery 1.x  You must include those two libraries on any page using this bundle.
 
 ## Usage
 ### Old way of usage (Deprecated)
