@@ -7,7 +7,7 @@ Bundle for Symfony 2.6+ that makes it easy to load pages into a Bootstrap modal 
 
 ## Installation
 
-### Step 1: Add the following to the "require" section of composer.json
+### Step 1: Require the bundle using Composer
 
 ```
 composer require sideclick/bootstrap-modal-bundle
