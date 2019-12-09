@@ -3,7 +3,7 @@ Bundle for Symfony 2.6+ that makes it easy to load pages into a Bootstrap modal 
 
 > Version 0.* is compatible with symfony/symfony: ^2.6 | ^3.2
 
-> Version 1.* is compatible with symfony/framework-bundle: ^3.3 | ^4.0
+> Version 1.* is compatible with symfony/framework-bundle: ^3.3 | ^4.0 | ^5.0
 
 ## Installation
 
