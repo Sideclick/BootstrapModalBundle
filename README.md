@@ -47,6 +47,14 @@ If not run please -  php bin/console assets:install
 <script src="{{ asset('bundles/sideclickbootstrapmodal/js/sideclick-bootstrap-modal.js') }}"></script>
 ```
 
+## Step 3 Alternative
+If you using Webpack Encore you can also import the the SideclickModal class in your global js file.
+```
+import SideclickModal from '../../public/bundles/sideclickbootstrapmodal/javascript/sideclick_modal';
+
+new SideclickModal();
+```
+
 ### Step 4:
 This bundle relies on Bootstrap 3.x or Bootstrap 4.x & jQuery 1.x  You must include those two libraries on any page using this bundle.
 
