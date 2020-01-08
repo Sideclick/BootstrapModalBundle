@@ -47,7 +47,7 @@ If not run please -  php bin/console assets:install
 <script src="{{ asset('bundles/sideclickbootstrapmodal/js/sideclick-bootstrap-modal.js') }}"></script>
 ```
 
-## Step 3 Alternative
+## Step 3 (Webpack Encore Alternative)
 If you using Webpack Encore you can also import the the SideclickModal class in your global js file.
 ```
 import SideclickModal from '../../public/bundles/sideclickbootstrapmodal/javascript/sideclick_modal';
