@@ -1,5 +1,7 @@
 /**
  * Created by rowan-reid on 2016/09/28.
+ *
+ * Todo THis function will be deprecated and replaced with minified version of the SideclickModal class
  */
 $(function() {
 

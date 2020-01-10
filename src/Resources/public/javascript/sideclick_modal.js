@@ -1,5 +1,7 @@
 // const $ = require('jquery');
-
+/**
+ * Todo Need create a minified version of class to use as script - (minified version will replace old function)
+ */
 class SideclickModal {
     constructor() {
 
