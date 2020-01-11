@@ -3,7 +3,7 @@ Bundle for Symfony 2.6+ that makes it easy to load pages into a Bootstrap modal 
 
 > Version 0.* is compatible with symfony/symfony: ^2.6 | ^3.2
 
-> Version 1.* is compatible with symfony/framework-bundle: ^3.3 | ^4.0
+> Version 1.* is compatible with symfony/framework-bundle: ^3.3 | ^4.0 | ^5.0
 
 ## Installation
 
@@ -45,6 +45,14 @@ If not run please -  php bin/console assets:install
 </div>
 
 <script src="{{ asset('bundles/sideclickbootstrapmodal/js/sideclick-bootstrap-modal.js') }}"></script>
+```
+
+## Step 3 (Webpack Encore Alternative)
+If you using Webpack Encore you can also import the the SideclickModal class in your global js file.
+```
+import SideclickModal from '../../public/bundles/sideclickbootstrapmodal/javascript/sideclick_modal';
+
+new SideclickModal();
 ```
 
 ### Step 4:
